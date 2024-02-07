@@ -78,6 +78,8 @@ class Context:
         self.__kas_build_dir = os.path.abspath(build_dir)
         ref_dir = os.environ.get('KAS_REPO_REF_DIR', None)
         self.__kas_repo_ref_dir = os.path.abspath(ref_dir) if ref_dir else None
+        self.__kas_host_path = os.environ.get('KAS_HOST_PATH',
+                                              '/usr/sbin:/usr/bin:/sbin:/bin')
         self.setup_initial_environ()
         self.config = None
         self.args = args
@@ -111,6 +113,8 @@ class Context:
             if val:
                 self.environ[key] = val
 
+        self.environ['PATH'] = self.kas_host_path
+
     @property
     def build_dir(self):
         """
@@ -131,6 +135,14 @@ class Context:
             The reference directory for the repo
         """
         return self.__kas_repo_ref_dir
+
+    @property
+    def kas_host_path(self):
+        """
+            The PATH environment variable value for processes that are
+            started by kas.
+        """
+        return self.__kas_host_path
 
     @property
     def force_checkout(self):

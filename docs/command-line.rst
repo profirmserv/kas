@@ -34,6 +34,18 @@ Environment variables
 |                          | as long as the underlying filesystem is POSIX    |
 |                          | compatible.                                      |
 +--------------------------+--------------------------------------------------+
+| ``KAS_HOST_PATH``        | The value Kas will use for the PATH environment  |
+|                          | variable when executing external commands. The   |
+|                          | default, ``/usr/sbin:/usr/bin:/sbin:/bin`` is    |
+|                          | usually fine, and you should only need to set    |
+|                          | this if your system stores commands in unusual   |
+|                          | locations.                                       |
+|                          |                                                  |
+|                          | WARNING: If you add directories that would cause |
+|                          | Git or Bitbake or your host toolchain to behave  |
+|                          | differently than it does in your automated build |
+|                          | environment, you're gonna have a bad time.       |
++--------------------------+--------------------------------------------------+
 | ``KAS_DISTRO``           | This overwrites the respective setting in the    |
 | ``KAS_MACHINE``          | configuration file.                              |
 | ``KAS_TARGET``           |                                                  |
